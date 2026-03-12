@@ -7,17 +7,15 @@ version: 2
 build:
   os: ubuntu-22.04
   tools:
-    python: "3.11" # 使用您指定的 Python 3.11
+    python: "3.11"
 
 sphinx:
-  configuration: source/conf.py # 使用您指定的 conf.py 路径
+  configuration: source/conf.py
 
-# Read the Docs 会根据此配置安装 requirements.txt 中的依赖
 python:
   install:
     - requirements: requirements.txt
 
-# 添加此行以启用 PDF 构建
 formats:
   - pdf
-  - html # 通常也会构建 HTML 格式，如果不需要可以移除
+  - html
