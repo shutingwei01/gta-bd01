@@ -1,7 +1,7 @@
-project = '产品硬件技术文档'
-copyright = '2026, YourCompany'
+project = 'GTA1000 Series Board User Guide'
+copyright = '2026, Giantec'
 author = 'Hardware Team'
-release = '1.0.0'
+release = '1.0'
 
 extensions = [
     'sphinx.ext.autodoc',
@@ -26,3 +26,11 @@ html_css_files = ['custom.css']
 
 todo_include_todos = True
 autosectionlabel_prefix_document = True
+
+numfig = True               # 开启图片、表格自动编号功能
+numfig_secnum_depth = 1     # 编号关联到几级标题？1 表示关联到一级标题 (如 1.1, 1.2)
+numfig_format = {
+    'figure': '图 %s',      # %s 会被自动替换为 1.1, 1.2 等数字
+    'table': '表 %s',
+    'code-block': '代码 %s'
+}
