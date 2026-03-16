@@ -50,7 +50,7 @@ numfig_format = {
 # --- 关键修改：恢复并修正 LaTeX 配置以支持 Read the Docs 云端 PDF 构建 ---
 # -- Options for LaTeX output --------------------------------------------------
 
-# 必须指定 xelatex 引擎，这是支持现代中文字体的前提
+# 必须指定 xelatex 引擎，这是支持现代中西文字体的前提
 latex_engine = 'xelatex'
 
 latex_elements = {
@@ -58,16 +58,34 @@ latex_elements = {
     'pointsize': '11pt',
     'preamble': r'''
 \usepackage{xeCJK}
-% 指定使用我们在 .readthedocs.yaml 中通过 apt 安装的 Noto CJK 字体
-\setCJKmainfont{Noto Sans CJK SC}
-\setCJKsansfont{Noto Sans CJK SC}
-\setCJKmonofont{Noto Sans CJK SC}
-\xeCJKsetup{CJKmath=true}
-\usepackage{indentfirst}
-\setlength{\parindent}{2em}
-% 优化中文换行
-\XeTeXlinebreaklocale "zh"
-\XeTeXlinebreakskip = 0pt plus 1pt
+
+% --- 全局字体风格设置 ---
+% 现代科技文档通常通篇使用无衬线体 (Sans-serif)。
+% 这行代码将 LaTeX 默认的衬线体 (Serif) 切换为无衬线体。
+\renewcommand{\familydefault}{\sfdefault}
+
+% --- 1. 设置西文字体 (英文字母、数字、符号) ---
+% 备用衬线体 (一般不用，但为了严谨配置上)
+\setmainfont{Noto Serif}       
+% 核心：正文和标题的西文无衬线体 (整洁、现代)
+\setsansfont{Noto Sans}        
+% 核心：代码块、终端命令使用的等宽西文字体
+\setmonofont{Noto Sans Mono}   
+
+% --- 2. 设置中文字体 (与上述西文字体逐一完美对应) ---
+% 备用中文衬线体 (思源宋体)
+\setCJKmainfont{Noto Serif CJK SC} 
+% 核心：正文和标题的中文无衬线体 (思源黑体，与 Noto Sans 完美融合)
+\setCJKsansfont{Noto Sans CJK SC}  
+% 核心：代码块中如果出现中文，也保持黑体风格
+\setCJKmonofont{Noto Sans CJK SC}  
+
+% --- 3. 中文排版细节优化 ---
+\xeCJKsetup{CJKmath=true} % 数学公式中的中文支持
+\usepackage{indentfirst}  % 允许首行缩进
+\setlength{\parindent}{2em} % 段落首行缩进2个中文字符宽度
+\XeTeXlinebreaklocale "zh"  % 中文换行规则
+\XeTeXlinebreakskip = 0pt plus 1pt % 允许换行处有微小的字距弹性，使排版更整齐
 ''',
     # 避免单面打印时章与章之间出现多余的空白页
     'extraclassoptions': 'openany,oneside', 
