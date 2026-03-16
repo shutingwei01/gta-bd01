@@ -8,11 +8,10 @@ build:
   os: ubuntu-22.04
   tools:
     python: "3.11"
-  apt_packages: # 新增此部分以安装字体
-    - fonts-noto-cjk # 安装 Noto CJK 字体包，包含简体中文
-    # 如果还需要其他语言的 Noto 字体，可以继续添加，例如：
-    # - fonts-noto-cjk-sc # 专门的简体中文 Noto 字体包，可能在某些环境中更精确
-    # - fonts-noto-color-emoji # 如果文档中包含表情符号
+  apt_packages: 
+    - fonts-noto-cjk        # 必需：安装 Noto CJK 字体包，提供中文字体
+    - texlive-xetex         # 必需：安装 xelatex 编译引擎
+    - texlive-lang-chinese  # 必需：安装 ctex, xeCJK 等中文 LaTeX 宏包
 
 sphinx:
   configuration: source/conf.py

@@ -1,6 +1,7 @@
+
 # conf.py
 
-# ... (文件顶部保持不变，如 Python 路径设置等，此处省略) ...
+# ... (文件顶部保持不变，如 Python 路径设置等) ...
 
 # -- Project information -----------------------------------------------------
 
@@ -11,14 +12,12 @@ release = '1.0'
 
 # -- General configuration ---------------------------------------------------
 
-# Add any Sphinx extension module names here, as strings. They can be
-# extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.todo',
     'myst_parser',
-    'sphinx_simplepdf',  # !!! 添加这一行，启用 Sphinx-SimplePDF 扩展 !!!
+    'sphinx_simplepdf',  # 保留此扩展，供本地构建使用
 ]
 
 source_suffix = {'.rst': 'restructuredtext', '.md': 'markdown'}
@@ -35,7 +34,7 @@ html_theme_options = {
     'sticky_navigation': True,
 }
 html_static_path = ['_static']
-html_css_files = ['custom.css'] # 请确保您的 _static/custom.css 文件存在
+html_css_files = ['custom.css']
 
 todo_include_todos = True
 autosectionlabel_prefix_document = True
@@ -48,48 +47,43 @@ numfig_format = {
     'code-block': '代码 %s'
 }
 
-# --- 注释掉原有的 LaTeX 输出配置，因为我们将使用 Sphinx-SimplePDF 生成 PDF ---
-# # -- Options for LaTeX output --------------------------------------------------
+# --- 关键修改：恢复并修正 LaTeX 配置以支持 Read the Docs 云端 PDF 构建 ---
+# -- Options for LaTeX output --------------------------------------------------
 
-# latex_elements = {
-#     'papersize': 'a4paper',
-#     'pointsize': '12pt',
-#     'preamble': r'''
-# \usepackage{xeCJK} % 启用 xeCJK 来支持 CJK 字体
-# \setmainfont{DejaVu Sans} % 设置主字体（你可以替换为系统中的任何中文字体，如 Songti SC, KaiTi, Microsoft YaHei 等）
-# \setCJKmainfont{SimSun} % 设置中文字体，例如：思源宋体 Source Han Serif CN, 或 Windows 上的 SimSun (宋体)
-# \xeCJKsetup{CJKmath=true} % 确保数学公式中的中文也正常
-# \usepackage{indentfirst} % 首行缩进
-# \setlength{\parindent}{2em} % 设置段落首行缩进两个汉字
-# \usepackage{ragged2 ελληνική}} % 左对齐环境
-# \RaggedRight % 全局左对齐，不使用两端对齐
-# ''',
-#     'figure_align': 'htbp',
-# }
+# 必须指定 xelatex 引擎，这是支持现代中文字体的前提
+latex_engine = 'xelatex'
 
-# latex_documents = [
-#     ('index', 'GTA1000_MicBoard_UserGuide.tex', 'GTA1000 Series 麦克风板用户指南',
-#      'Giantec Hardware Team', 'manual'),
-# ]
+latex_elements = {
+    'papersize': 'a4paper',
+    'pointsize': '11pt',
+    'preamble': r'''
+\usepackage{xeCJK}
+% 指定使用我们在 .readthedocs.yaml 中通过 apt 安装的 Noto CJK 字体
+\setCJKmainfont{Noto Sans CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans CJK SC}
+\xeCJKsetup{CJKmath=true}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+% 优化中文换行
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
+''',
+    # 避免单面打印时章与章之间出现多余的空白页
+    'extraclassoptions': 'openany,oneside', 
+    'figure_align': 'H',
+}
+
+latex_documents = [
+    ('index', 'GTA1000_MicBoard_UserGuide.tex', 'GTA1000 Series 麦克风板用户指南',
+     'Giantec Hardware Team', 'manual'),
+]
 # -----------------------------------------------------------------------------
 
 
 # -- Options for simplepdf output --------------------------------------------
-# !!! 这是 SimplePDF 的关键配置 !!!
+# (以下配置将保留，当您在本地电脑上运行 sphinx-build -b simplepdf 时会生效，但在 RTD 云端 formats: pdf 构建中不会生效)
 
-# PDF 文档的标题
-# 沿用您项目信息的 title，并添加适当的后缀
-simplepdf_title = project + ' 麦克风板用户指南' # 根据您的 latex_documents 标题调整
-
-# 是否在 PDF 首页显示目录
+simplepdf_title = project + ' 麦克风板用户指南'
 simplepdf_use_toc = True
-
-# 用于设置 PDF 样式的 CSS 文件列表。
-# 路径是相对于 conf.py 文件的目录。
-# 这里的 '_static/simplepdf.css' 指的是 docs/_static/simplepdf.css
 simplepdf_stylesheets = ['_static/simplepdf.css']
-
-# 您还可以添加其他 simplepdf_ 配置，例如：
-# simplepdf_fit_width = False # 是否让内容自动适应页面宽度
-# simplepdf_break_level = 1 # 在哪个标题级别之后分页
-# simplepdf_debug = False # 启用调试模式，可以查看渲染细节
