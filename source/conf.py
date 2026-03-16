@@ -25,6 +25,13 @@ templates_path = ['_templates']
 exclude_patterns = []
 language = 'zh_CN'
 
+# -- MyST-Parser 配置 --------------------------------------------------------
+# 【新增关键配置】开启 Markdown 中的数学公式支持
+myst_enable_extensions = [
+    "dollarmath",   # 允许使用 $公式$ 和 $$公式$$ 语法（解决 $\geq$ 不渲染的核心）
+    "amsmath",      # 支持高级数学公式环境（如 align, equation 等）
+]
+
 # -- Options for HTML output -------------------------------------------------
 
 html_theme = 'sphinx_rtd_theme'
@@ -86,6 +93,20 @@ latex_elements = {
 \setlength{\parindent}{2em} % 段落首行缩进2个中文字符宽度
 \XeTeXlinebreaklocale "zh"  % 中文换行规则
 \XeTeXlinebreakskip = 0pt plus 1pt % 允许换行处有微小的字距弹性，使排版更整齐
+
+% --- 4.【新增】Unicode 特殊符号 → LaTeX 数学符号映射 ---
+% 双保险：即使您在 .md 文件中直接输入 ≥ ≤ 等 Unicode 字符（不用 $ $ 包裹），
+% PDF 也不会再出现方块或空白，LaTeX 会自动将它们转为标准数学符号渲染。
+\usepackage{newunicodechar}
+\newunicodechar{≥}{\ensuremath{\geq}}
+\newunicodechar{≤}{\ensuremath{\leq}}
+\newunicodechar{±}{\ensuremath{\pm}}
+\newunicodechar{×}{\ensuremath{\times}}
+\newunicodechar{÷}{\ensuremath{\div}}
+\newunicodechar{≈}{\ensuremath{\approx}}
+\newunicodechar{≠}{\ensuremath{\neq}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
 ''',
     # 避免单面打印时章与章之间出现多余的空白页
     'extraclassoptions': 'openany,oneside', 
@@ -93,7 +114,7 @@ latex_elements = {
 }
 
 latex_documents = [
-    ('index', 'GTA1000_MicBoard_UserGuide.tex', 'GTA1000 Series 麦克风板用户指南',
+    ('index', f'GTA1000_MicBoard_UserGuide_V{release}.tex', 'GTA1000 Series 麦克风板用户指南',
      'Giantec Hardware Team', 'manual'),
 ]
 # -----------------------------------------------------------------------------
