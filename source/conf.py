@@ -126,4 +126,5 @@ latex_documents = [
 simplepdf_title = project + ' 麦克风板用户指南'
 simplepdf_use_toc = True
 simplepdf_stylesheets = ['_static/simplepdf.css']
+
 today = ''
