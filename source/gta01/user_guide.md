@@ -41,6 +41,22 @@ GTA1000 Series 麦克风板（环形）正面布局图
 GTA1000 Series 麦克风板（环形）背面布局图
 ```
 
+```{figure} /_static/images/G10003_micboard-Linear-layout-v1.png  
+:align: center  
+:width: 80%  
+:alt: GTA01 mic卡布局图  
+
+GTA1000 Series 麦克风板（线形）正面布局图
+```
+
+```{figure} /_static/images/G10004_micboard-Linear-back-layout-v1.png  
+:align: center  
+:width: 80%  
+:alt: GTA01 mic卡布局图背  
+
+GTA1000 Series 麦克风板（线形）背面布局图
+```
+
 ## 模块说明
 
 所有型号的麦克风板共享相同的功能架构，均包含以下三个核心模块：
