@@ -41,7 +41,7 @@ GTA1000 Series 麦克风板（环形）正面布局图
 GTA1000 Series 麦克风板（环形）背面布局图
 ```
 
-```{figure} /_static/images/G10003_micboard-linear-layout-v1.png  
+```{figure} /_static/images/G10003_micboard-inear-layout-v1.png  
 :align: center  
 :width: 80%  
 :alt: GTA01 mic卡布局图  
