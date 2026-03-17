@@ -46,7 +46,7 @@ GTA1000 Series 麦克风板（环形）背面布局图
 :width: 100%  
 :alt: GTA01 mic卡布局图  
 
-GTA1000 Series 麦克风板（线形）正面布局图
+GTA1000 Series 麦克风板（线形）正面布局图（以 154mm × 15 mm 规格为例）
 ```
 
 ```{figure} /_static/images/G10004_micboard-linear-back-layout-v1.jpg
@@ -54,7 +54,11 @@ GTA1000 Series 麦克风板（线形）正面布局图
 :width: 65%
 :alt: GTA01 mic卡布局图背
 
-GTA1000 Series 麦克风板（线形）背面布局图
+GTA1000 Series 麦克风板（线形）背面布局图（以 154mm × 15 mm 规格为例）
+```
+
+```{note}  
+以上图示仅以 `154mm × 15 mm` (BOD0043) 规格的线形板作为布局参考示例。GTA1000 Series 提供了多种物理尺寸的线形麦克风板，尽管外形尺寸、MIC 间距和各模块的相对位置有所不同，但接口定义及硬件布局逻辑均保持一致。
 ```
 
 ## 模块说明
