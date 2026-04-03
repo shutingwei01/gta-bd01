@@ -84,7 +84,7 @@ The directions vary; please be sure to double-check the table above before wirin
 
 # Hardware Connection
 
-## Single-Stage Connection (1 microphone board)
+## Single-Stage Connection (1 Mic Board)
 
 Suitable for basic 4-channel sound pickup scenarios.
 
@@ -92,7 +92,7 @@ Suitable for basic 4-channel sound pickup scenarios.
 2. Connect the other end to Interface A on the microphone board, aligning with the "+" mark.
 3. Leave Interface B unconnected; no connection is needed.
 
-## Multi-Stage Cascade Connection (≥ 2 microphone boards)
+## Multi-Stage Cascade Connection (≥ 2 Mic Boards)
 
 Use the cascade method when expanding to 8 or more channels.
 

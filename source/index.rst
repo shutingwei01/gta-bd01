@@ -8,7 +8,7 @@ Welcome to the GTA1000 Series development board technical documentation.
 
 .. toctree::
    :maxdepth: 2
-   :caption: GTA1000 Series Microphone Board User Guide
+   :caption: GTA1000 Mic Board User Guide
    :numbered:
 
    gta01/user_guide
