@@ -17,7 +17,7 @@ extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.todo',
     'myst_parser',
-    'sphinx_simplepdf',  # 保留此扩展，供本地构建使用
+    'sphinx_simplepdf',  # Keep this extension for local build
 ]
 
 source_suffix = {'.rst': 'restructuredtext', '.md': 'markdown'}
@@ -25,7 +25,7 @@ templates_path = ['_templates']
 exclude_patterns = []
 language = 'en'
 
-# -- MyST-Parser 配置 --------------------------------------------------------
+# -- MyST-Parser Configuration -----------------------------------------------
 myst_enable_extensions = [
     "dollarmath",   
     "amsmath",      
@@ -74,8 +74,6 @@ latex_elements = {
 \xeCJKsetup{CJKmath=true} 
 \usepackage{indentfirst}  
 \setlength{\parindent}{2em} 
-\XeTeXlinebreaklocale "zh"  
-\XeTeXlinebreakskip = 0pt plus 1pt 
 
 \usepackage{newunicodechar}
 \newunicodechar{≥}{\ensuremath{\geq}}
@@ -89,7 +87,7 @@ latex_elements = {
 \newunicodechar{Ω}{\ensuremath{\Omega}}
 
 % ==========================================
-% 【终极杀手锏】强制隐藏封面的作者和日期
+% Force hide author and date on the cover page
 % ==========================================
 \makeatletter
 \renewcommand{\author}[1]{\gdef\@author{}}
@@ -101,14 +99,14 @@ latex_elements = {
     'figure_align': 'H',
 }
 
-# 这里我们将原本的 'Giantec Hardware Team' 替换为了空字符串 ''
+# We replaced the original author with an empty string ''
 latex_documents = [
-    ('index', f'GTA1000_MicBoard_UserGuide_V{release}.tex', 'GTA1000 Series 麦克风板用户指南',
+    ('index', f'GTA1000_MicBoard_UserGuide_V{release}.tex', 'GTA1000 Mic Board User Guide',
      '', 'manual'),
 ]
 
 # -- Options for simplepdf output --------------------------------------------
-simplepdf_title = project + ' 麦克风板用户指南'
+simplepdf_title = project + ' Mic Board User Guide'
 simplepdf_use_toc = True
 simplepdf_stylesheets = ['_static/simplepdf.css']
 today = ''
