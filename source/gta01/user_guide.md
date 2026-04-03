@@ -1,117 +1,108 @@
 
+> **Document Version**: V1.0 &nbsp;&nbsp;
 
-> **文档版本**：V1.0 &nbsp;&nbsp;
+# Overview
 
----
+The GTA1000 Series microphone board is a 4-channel MEMS microphone array module designed specifically for far-field voice capture. It is used for voice pre-processing such as multi-channel sound pickup, sound source localization, and noise reduction.
 
-# 概述
+The board connects to the mainboard via a ribbon cable interface and supports single-stage or multi-stage cascade deployment to meet the needs of different array scales.
 
-GTA1000 Series 麦克风板是专为远场语音采集设计的 4 通道 MEMS 麦克风阵列模组，用于多通道拾音、声源定位及降噪等语音前处理。
+## Product Models Overview
 
-板卡通过排线接口与主板相连，支持单级或多级级联部署，以满足不同阵列规模的需求。
-
-## 产品型号一览
-
-| 物料编号 | 产品料号 | 板型 | 外形尺寸 | MIC 间距 |
+| Material Number | Product Part Number | Board Type | Dimensions | MIC Spacing |
 |:-------:|:---------|:---:|:--------:|:---------:|
-| BOD0038 | ASN_4MIC_H6CM_70_70 | 环形 | 约 70 × 70 mm | 6 cm |
-| BOD0043 | ASN_4MIC_4CM_154_15 | 线形 | 154 × 15 mm | 4 cm |
-| BOD0044 | ASN_4MIC_3.5CM_160_17 | 线形 | 160 × 17 mm | 3.5 cm |
-| BOD0046 | ASN_4MIC_3.5CM_115_20 | 线形 | 115 × 20 mm | 3.5 cm |
+| BOD0038 | ASN_4MIC_H6CM_70_70 | Circular | Approx. 70 × 70 mm | 6 cm |
+| BOD0043 | ASN_4MIC_4CM_154_15 | Linear | 154 × 15 mm | 4 cm |
+| BOD0044 | ASN_4MIC_3.5CM_160_17 | Linear | 160 × 17 mm | 3.5 cm |
+| BOD0046 | ASN_4MIC_3.5CM_115_20 | Linear | 115 × 20 mm | 3.5 cm |
 
----
+# Board Layout and Module Description
 
-# 板卡布局与模块说明
-
-## 板卡布局
+## Board Layout
 
 ```{figure} /_static/images/G10001_micboard-circular-layout-v1.png  
 :align: center  
 :width: 85%  
-:alt: GTA01 mic卡布局图  
+:alt: GTA01 mic board layout  
 
-GTA1000 Series 麦克风板（环形）正面布局图
+GTA1000 Series Microphone Board (Circular) Front Layout
 ```
 
 ```{figure} /_static/images/G10002_micboard-circular-back-layout-v1.png  
 :align: center  
 :width: 55%  
-:alt: GTA01 mic卡布局图背  
+:alt: GTA01 mic board back layout  
 
-GTA1000 Series 麦克风板（环形）背面布局图
+GTA1000 Series Microphone Board (Circular) Back Layout
 ```
 
 ```{figure} /_static/images/G10003_micboard-inear-layout-v1.png  
 :align: center  
 :width: 100%  
-:alt: GTA01 mic卡布局图  
+:alt: GTA01 mic board layout  
 
-GTA1000 Series 麦克风板（线形）正面布局图（以 154mm × 15 mm 规格为例）
+GTA1000 Series Microphone Board (Linear) Front Layout (Using the 154mm × 15mm specification as an example)
 ```
 
 ```{figure} /_static/images/G10004_micboard-linear-back-layout-v1.jpg
 :align: center  
 :width: 65%
-:alt: GTA01 mic卡布局图背
+:alt: GTA01 mic board back layout
 
-GTA1000 Series 麦克风板（线形）背面布局图（以 154mm × 15 mm 规格为例）
+GTA1000 Series Microphone Board (Linear) Back Layout (Using the 154mm × 15mm specification as an example)
 ```
 
-```{important} 尺寸与布局说明
-以上图示仅以 `154mm × 15 mm` (BOD0043) 规格的线形板作为布局参考示例。
-GTA1000 Series 提供了多种物理尺寸的线形麦克风板，尽管外形尺寸、MIC 间距和各模块的相对位置有所不同，但接口定义及硬件布局逻辑均保持一致。
+```{important} Dimensions and Layout Instructions
+The above illustrations use the `154mm × 15 mm` (BOD0043) linear board specification as a layout reference example only.
+The GTA1000 Series provides linear microphone boards in various physical dimensions. Although the external dimensions, MIC spacing, and relative positions of each module may vary, the interface definitions and hardware layout logic remain consistent.
 ```
 
-## 模块说明
+## Module Description
 
-所有型号的麦克风板共享相同的功能架构，均包含以下三个核心模块：
+All models of microphone boards share the same functional architecture and include the following three core modules:
 
-| 模块 | 丝印标识 | 功能 |
+| Module | Silkscreen Marking | Function |
 |:----:|:-------:|:-----|
-| **接口 A（上行）** | JP2| 连接主板或上一级麦克风板。单级使用时只接此口。 |
-| **接口 B（下行）** | JP1| 连接下一级麦克风板，仅级联时使用。 |
-| **MIC × 4** |/| 底进音 MEMS 麦克风，环形板呈圆形分布，线形板沿长边线性排列。 |
+| **Interface A (Upstream)** | JP2 | Connects to the mainboard or the previous-stage microphone board. When used in a single stage, only this port is connected. |
+| **Interface B (Downstream)** | JP1 | Connects to the next-stage microphone board, used only when cascading. |
+| **MIC × 4** | / | Bottom-port MEMS microphones. Distributed circularly on the circular board, and arranged linearly along the long edge on the linear board. |
 
-**极性标识**：每个接口旁有圆点标记，圆点所在侧即为"+"方向。接线时必须确保两端"+"对"+"。
+**Polarity Marking**: There is a dot mark next to each interface, and the side with the dot indicates the "+" direction. When wiring, you must ensure that the "+" on both ends are aligned ("+" to "+").
 
-## 接口极性速查表
+## Interface Polarity Quick Reference Table
 
-| 型号 | 接口 A "+"方向 | 接口 B "+"方向 |
+| Model | Interface A "+" Direction | Interface B "+" Direction |
 |:----:|:-------------:|:-------------:|
-| BOD0038（环形） | 左侧圆点 | 右侧圆点 |
-| BOD0043（154×15） | 下方圆点 | 上方圆点 |
-| BOD0044（160×17） | 右侧圆点 | 右侧圆点 |
-| BOD0046（115×20） | 上方圆点 | 下方圆点 |
+| BOD0038 (Circular) | Left dot | Right dot |
+| BOD0043 (154×15) | Bottom dot | Top dot |
+| BOD0044 (160×17) | Right dot | Right dot |
+| BOD0046 (115×20) | Top dot | Bottom dot |
 
 ```{note}  
-方向不同，接线前请务必核对上表。 
+The directions vary; please be sure to double-check the table above before wiring. 
 ```
 
----
+# Hardware Connection
 
-# 硬件连接
+## Single-Stage Connection (1 microphone board)
 
-## 单级连接（1 块麦克风板）
+Suitable for basic 4-channel sound pickup scenarios.
 
-适用于基础 4 通道拾音场景。
+1. Connect one end of the ribbon cable to the mainboard input.
+2. Connect the other end to Interface A on the microphone board, aligning with the "+" mark.
+3. Leave Interface B unconnected; no connection is needed.
 
-1. 排线一端接入主板输入。
-2. 另一端接入麦克风板接口 A，对齐"+"标记。
-3. 接口 B 悬空，无需连接。
+## Multi-Stage Cascade Connection (≥ 2 microphone boards)
 
-## 多级级联连接（≥ 2 块麦克风板）
+Use the cascade method when expanding to 8 or more channels.
 
-扩展至 8 路或更多通道时，使用级联方式。
+1. Connect the mainboard via a ribbon cable to Interface A of the 1st-stage microphone board.
+2. Connect Interface B of the 1st stage via a ribbon cable to Interface A of the 2nd stage.
+3. If further expansion is needed, repeat the cascade. Leave Interface B of the final stage unconnected.
 
-1. 主板通过排线连接至 第 1 级麦克风板的接口 A。
-2. 第 1 级接口 B 通过排线连接至第 2 级接口 A。
-3. 如需继续扩展，重复级联。最末级接口 B 悬空。
+# Typical Applications
 
----
-
-# 典型应用
-
-| 板型 | 典型产品 | 拾音特点 |
+| Board Type | Typical Products | Sound Pickup Characteristics |
 |:---:|:---------|:---------|
-| 环形 | 智能音箱、桌面会议终端、语音机器人 | 360° 全向拾音与声源定位 |
-| 线形 | 智能电视/Soundbar、智能面板、壁挂终端 | 定向波束成形，抑制侧向噪声 |
+| Circular | Smart speakers, desktop conferencing terminals, voice robots | 360° omnidirectional pickup and sound source localization |
+| Linear | Smart TVs/Soundbars, smart panels, wall-mounted terminals | Directional beamforming, suppressing lateral noise |
