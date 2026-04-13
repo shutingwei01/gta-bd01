@@ -60,7 +60,12 @@ latex_engine = 'xelatex'
 latex_elements = {
     'papersize': 'a4paper',
     'pointsize': '11pt',
+    
+    # [修改点 1]：强制英文版也使用与中文版统一的 Sonny 章节标题样式
+    'fncychap': r'\usepackage[Sonny]{fncychap}',
+    
     'preamble': r'''
+% --- Font settings ---
 \usepackage{xeCJK}
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -70,11 +75,30 @@ latex_elements = {
 \setCJKmainfont{Noto Serif CJK SC} 
 \setCJKsansfont{Noto Sans CJK SC}  
 \setCJKmonofont{Noto Sans CJK SC}  
-
 \xeCJKsetup{CJKmath=true} 
-\usepackage{indentfirst}  
-\setlength{\parindent}{2em} 
 
+% ==========================================
+% English Typography Standard Settings
+% ==========================================
+% Remove Chinese indent style, use standard English paragraph spacing
+\setlength{\parindent}{0pt}             % No first-line indent
+\setlength{\parskip}{0.6\baselineskip}  % Add space between paragraphs
+\linespread{1.15}                       % Slightly increase line height for readability
+
+% ==========================================
+% Professional PDF Styling (Sphinx Setup)
+% ==========================================
+\sphinxsetup{
+    hmargin={1in,1in},         % Standard 1-inch left/right margins
+    vmargin={1in,1in},         % Standard 1-inch top/bottom margins
+    TitleColor={rgb}{0,0,0},   % Keep titles clean black
+    InnerLinkColor={rgb}{0.0,0.3,0.7}, % Professional blue for internal links (TOC, cross-refs)
+    OuterLinkColor={rgb}{0.0,0.3,0.7}, % Professional blue for URLs
+    verbatimwithframe=false,   % Remove ugly borders around code blocks
+    verbatimwrapslines=true,   % Automatically wrap long code lines
+}
+
+% --- Special character handling ---
 \usepackage{newunicodechar}
 \newunicodechar{≥}{\ensuremath{\geq}}
 \newunicodechar{≤}{\ensuremath{\leq}}
@@ -85,6 +109,15 @@ latex_elements = {
 \newunicodechar{≠}{\ensuremath{\neq}}
 \newunicodechar{µ}{\ensuremath{\mu}}
 \newunicodechar{Ω}{\ensuremath{\Omega}}
+
+% ==========================================
+% [修改点 2 & 3]：修复表格长字符串溢出与表头加粗
+% ==========================================
+% 重新定义下划线，让 LaTeX 遇到下划线时允许自动换行
+\renewcommand{\_}{\textunderscore\allowbreak}
+
+% 重写 Sphinx 的表头样式，加入 \bfseries (加粗) 指令
+\renewcommand{\sphinxstyletheadfamily}{\bfseries\sffamily}
 
 % ==========================================
 % Force hide author and date on the cover page
