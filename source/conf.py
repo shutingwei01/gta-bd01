@@ -80,7 +80,6 @@ latex_elements = {
 % ==========================================
 % English Typography Standard Settings
 % ==========================================
-% 取消首行缩进，采用段落间距，增加行距
 \setlength{\parindent}{0pt}             
 \setlength{\parskip}{0.6\baselineskip}  
 \linespread{1.15}                       
@@ -90,24 +89,53 @@ latex_elements = {
 % ==========================================
 \usepackage{titlesec}
 \titleformat{\chapter}[display]
-  {\normalfont\sffamily\Huge\bfseries\raggedright}  % 全局巨大、加粗、无衬线字体、左对齐
-  {Chapter \thechapter}                             % "Chapter X" 使用相同的巨大字体，保持视觉统一
-  {0.5ex}                                           % 极小的间距，让章节号和标题文字紧密相连
-  {}                                                % 紧接具体的标题内容
-  [\vspace{1ex}\titlerule]                          % 在标题正下方加一条贯穿页面的粗实线，稳住排版重心
-\titlespacing*{\chapter}{0pt}{-30pt}{30pt}          % 压缩顶部留白，预留底部空间
+  {\normalfont\sffamily\Huge\bfseries\raggedright}
+  {Chapter \thechapter}
+  {0.5ex}
+  {}
+  [\vspace{1ex}\titlerule]
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+
+% ==========================================
+% 修复表格列宽分配不均导致表头文字截断
+% ==========================================
+\setlength{\tymin}{45pt}
+
+% ==========================================
+% 统一页脚样式：仅显示页码（右下角）
+% ==========================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% 清空所有默认的页眉页脚内容（移除左边的章节标题等）
+\fancyhf{}
+
+% 仅在右下角显示页码
+\fancyfoot[R]{\thepage}
+
+% 移除页眉和页脚的分隔线
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% 【关键】让章节首页（plain 样式）也使用相同的简洁页脚
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
 
 % ==========================================
 % Professional PDF Styling (Sphinx Setup)
 % ==========================================
 \sphinxsetup{
-    hmargin={1in,1in},         % 国际标准的 1 英寸页边距
+    hmargin={1in,1in},         
     vmargin={1in,1in},         
-    TitleColor={rgb}{0,0,0},   % 标题纯黑
-    InnerLinkColor={rgb}{0.0,0.3,0.7}, % 目录、交叉引用使用专业蓝色
-    OuterLinkColor={rgb}{0.0,0.3,0.7}, % URL 使用专业蓝色
-    verbatimwithframe=false,   % 移除代码块多余边框
-    verbatimwrapslines=true,   % 代码自动换行
+    TitleColor={rgb}{0,0,0},   
+    InnerLinkColor={rgb}{0.0,0.3,0.7}, 
+    OuterLinkColor={rgb}{0.0,0.3,0.7}, 
+    verbatimwithframe=false,   
+    verbatimwrapslines=true,   
 }
 
 % --- Special character handling ---
@@ -125,9 +153,7 @@ latex_elements = {
 % ==========================================
 % 表格深度优化：修复溢出与表头加粗
 % ==========================================
-% 重新定义下划线，让 LaTeX 遇到长下划线字符串（如寄存器名/料号）时允许自动换行
 \renewcommand{\_}{\textunderscore\allowbreak}
-% 强制 Sphinx 生成的表格表头使用加粗的无衬线字体
 \renewcommand{\sphinxstyletheadfamily}{\bfseries\sffamily}
 
 % ==========================================
