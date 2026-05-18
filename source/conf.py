@@ -27,8 +27,8 @@ language = 'zh_CN'
 
 # -- MyST-Parser 配置 --------------------------------------------------------
 myst_enable_extensions = [
-    "dollarmath",   
-    "amsmath",      
+    "dollarmath",
+    "amsmath",
 ]
 
 # -- Options for HTML output -------------------------------------------------
@@ -60,23 +60,111 @@ latex_engine = 'xelatex'
 latex_elements = {
     'papersize': 'a4paper',
     'pointsize': '11pt',
+
+    # ① 禁用 Sphinx 自带的 fncychap 章节标题样式，改用 titlesec 自定义
+    'fncychap': '',
+
     'preamble': r'''
+% ==========================================
+% Font Settings
+% ==========================================
 \usepackage{xeCJK}
 
 \renewcommand{\familydefault}{\sfdefault}
-\setmainfont{Noto Serif}       
-\setsansfont{Noto Sans}        
-\setmonofont{Noto Sans Mono}   
-\setCJKmainfont{Noto Serif CJK SC} 
-\setCJKsansfont{Noto Sans CJK SC}  
-\setCJKmonofont{Noto Sans CJK SC}  
+\setmainfont{Noto Serif}
+\setsansfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
+\setCJKmainfont{Noto Serif CJK SC}
+\setCJKsansfont{Noto Sans CJK SC}
+\setCJKmonofont{Noto Sans CJK SC}
 
-\xeCJKsetup{CJKmath=true} 
-\usepackage{indentfirst}  
-\setlength{\parindent}{2em} 
-\XeTeXlinebreaklocale "zh"  
-\XeTeXlinebreakskip = 0pt plus 1pt 
+\xeCJKsetup{CJKmath=true}
+\usepackage{indentfirst}
+\setlength{\parindent}{2em}
+\XeTeXlinebreaklocale "zh"
+\XeTeXlinebreakskip = 0pt plus 1pt
 
+% ==========================================
+% NXP / 欧美经典硬件手册标题样式
+% ==========================================
+\usepackage{titlesec}
+\usepackage{xcolor}
+
+% Chapter（一级标题）：NXP 风格——标签行 + 标题行 + 底部横线
+\titleformat{\chapter}[display]
+  {\normalfont\sffamily\bfseries\color{black}\raggedright}
+  {\Huge 第 \thechapter\ 章}
+  {0.5ex}
+  {\Huge}
+  [\vspace{1ex}\titlerule]
+\titlespacing*{\chapter}{0pt}{-30pt}{30pt}
+
+% Section（二级标题）
+\titleformat{\section}
+  {\normalfont\sffamily\Large\bfseries\color{black}}
+  {\thesection}
+  {1em}
+  {}
+
+% Subsection（三级标题）
+\titleformat{\subsection}
+  {\normalfont\sffamily\large\bfseries\color{black}}
+  {\thesubsection}
+  {1em}
+  {}
+
+% Subsubsection（四级标题）
+\titleformat{\subsubsection}
+  {\normalfont\sffamily\normalsize\bfseries\color{black}}
+  {\thesubsubsection}
+  {1em}
+  {}
+
+% ==========================================
+% 修复表格列宽分配不均导致表头文字截断
+% ==========================================
+\setlength{\tymin}{45pt}
+
+% ==========================================
+% 统一页脚样式：仅显示页码（右下角）
+% ==========================================
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+% 清空所有默认的页眉页脚内容
+\fancyhf{}
+
+% 仅在右下角显示页码
+\fancyfoot[R]{\thepage}
+
+% 移除页眉和页脚的分隔线
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% 让章节首页（plain 样式）也使用相同的简洁页脚
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[R]{\thepage}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+% ==========================================
+% Professional PDF Styling (Sphinx Setup)
+% ==========================================
+\sphinxsetup{
+    hmargin={1in,1in},
+    vmargin={1in,1in},
+    TitleColor={rgb}{0,0,0},
+    InnerLinkColor={rgb}{0.0,0.0,0.8},
+    OuterLinkColor={rgb}{0.0,0.0,0.8},
+    verbatimwithframe=false,
+    verbatimwrapslines=true,
+}
+
+% ==========================================
+% Special Character Handling
+% ==========================================
 \usepackage{newunicodechar}
 \newunicodechar{≥}{\ensuremath{\geq}}
 \newunicodechar{≤}{\ensuremath{\leq}}
@@ -89,7 +177,17 @@ latex_elements = {
 \newunicodechar{Ω}{\ensuremath{\Omega}}
 
 % ==========================================
-% 【终极杀手锏】强制隐藏封面的作者和日期
+% 表格深度优化：修复溢出与表头加粗
+% ==========================================
+\renewcommand{\_}{\textunderscore\allowbreak}
+\renewcommand{\sphinxstyletheadfamily}{\bfseries\sffamily}
+
+% ==========================================
+\newcommand{\PDFHideContent}[1]{}
+% ==========================================
+
+% ==========================================
+% 强制隐藏封面的作者和日期
 % ==========================================
 \makeatletter
 \renewcommand{\author}[1]{\gdef\@author{}}
@@ -97,11 +195,10 @@ latex_elements = {
 \makeatother
 % ==========================================
 ''',
-    'extraclassoptions': 'openany,oneside', 
+    'extraclassoptions': 'openany,oneside',
     'figure_align': 'H',
 }
 
-# 这里我们将原本的 'Giantec Hardware Team' 替换为了空字符串 ''
 latex_documents = [
     ('index', f'GTA1000_MicBoard_UserGuide_V{release}.tex', 'GTA1000 Series 麦克风板用户指南',
      '', 'manual'),
