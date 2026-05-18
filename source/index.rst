@@ -4,7 +4,15 @@
 GTA1000 Series
 ==============================
 
+.. raw:: latex
+
+   \PDFHideContent{
+
 欢迎查阅 GTA1000 Series 开发板技术文档。
+
+.. raw:: latex
+
+   }
 
 .. toctree::
    :maxdepth: 2
@@ -12,3 +20,4 @@ GTA1000 Series
    :numbered:
 
    gta01/user_guide
+
